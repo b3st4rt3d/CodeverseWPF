@@ -1,0 +1,72 @@
+﻿<Window x:Class="CodeverseWPF.MainWindow.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeverseWPF.MainWindow"
+        mc:Ignorable="d"
+        Title="Codeverse" Height="1080" Width="1920" WindowState="Maximized" WindowStartupLocation="CenterScreen" Icon="/MainWindow/logo-codeverse.jpg">
+    <Grid Background="#FF101828" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Grid.Column="0" Background="#FF1D2533">
+            <Image DockPanel.Dock="Top" Source="/MainWindow/CODEVERSE.png" Width="180" Margin="0,25,0,0" VerticalAlignment="Top"></Image>
+            <Button DockPanel.Dock="Bottom" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,25">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Source="/MainWindow/exit.png" Width="30" Height="30"></Image>
+                    <TextBlock Style="{StaticResource Roboto}" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Выход</TextBlock>
+                </StackPanel>
+            </Button>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel>
+                    <Image Source="/MainWindow/profile3.png" Width="100" Height="99.7"></Image>
+                    <TextBlock Text="Пользователь" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                </StackPanel>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50" Margin="0,60,0,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Source="/MainWindow/order.png" Width="30" Height="30"></Image>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Заказы</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnDevice" Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50" Click="BtnDevice_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Source="/MainWindow/pc.png" Width="30" Height="30"></Image>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="23" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Компьютеры</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnDetail" Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50" Click="BtnDetail_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Source="/MainWindow/details.png" Width="30" Height="30"></Image>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Детали</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Source="/MainWindow/reports.png" Width="30" Height="30"></Image>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Отчеты</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClients" Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50" Click="BtnClients_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Source="/MainWindow/clients.png" Width="30" Height="30"></Image>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Клиенты</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Width="240" Height="50">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+                        <Image Width="30" Height="30" Source="/MainWindow/profile-1341-svgrepo-com 1.png"/>
+                        <TextBlock Style="{StaticResource Montserrat}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">Профиль</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+
+        <Frame x:Name="MainFrame" Grid.Row="0" Grid.Column="1"></Frame>
+    </Grid>
+</Window>

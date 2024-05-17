@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="clients.png" />
+    <None Remove="CODEVERSE.png" />
+    <None Remove="details.png" />
+    <None Remove="exit.png" />
+    <None Remove="MainWindow\clients.png" />
+    <None Remove="MainWindow\CODEVERSE.png" />
+    <None Remove="MainWindow\details.png" />
+    <None Remove="MainWindow\exit.png" />
+    <None Remove="MainWindow\logo-codeverse.jpg" />
+    <None Remove="MainWindow\order.png" />
+    <None Remove="MainWindow\Pages\white.jpg" />
+    <None Remove="MainWindow\pc.png" />
+    <None Remove="MainWindow\profile-1341-svgrepo-com 1.png" />
+    <None Remove="MainWindow\profile2.png" />
+    <None Remove="MainWindow\profile3.png" />
+    <None Remove="MainWindow\reports.png" />
+    <None Remove="order.png" />
+    <None Remove="pc.png" />
+    <None Remove="profile-1341-svgrepo-com 1.png" />
+    <None Remove="profile.png" />
+    <None Remove="reports.png" />
+    <None Remove="Windows\CODEVERSE.png" />
+    <None Remove="Windows\Frame 1.png" />
+    <None Remove="Windows\logo-codeverse.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MainWindow\clients.png" />
+    <Resource Include="MainWindow\CODEVERSE.png" />
+    <Resource Include="MainWindow\details.png" />
+    <Resource Include="MainWindow\exit.png" />
+    <Resource Include="MainWindow\logo-codeverse.jpg" />
+    <Resource Include="MainWindow\order.png" />
+    <Resource Include="MainWindow\Pages\white.jpg" />
+    <Resource Include="MainWindow\pc.png" />
+    <Resource Include="MainWindow\profile-1341-svgrepo-com 1.png" />
+    <Resource Include="MainWindow\profile2.png" />
+    <Resource Include="MainWindow\profile3.png" />
+    <Resource Include="MainWindow\reports.png" />
+    <Resource Include="Windows\CODEVERSE.png" />
+    <Resource Include="Windows\Frame 1.png" />
+    <Resource Include="Windows\logo-codeverse.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

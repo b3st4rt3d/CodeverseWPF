@@ -1,0 +1,99 @@
+﻿<Window x:Class="CodeverseWPF.Windows.WindowChangeConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeverseWPF.Windows"
+        mc:Ignorable="d"
+        Title="Конфигурация" Height="900" Width="900">
+    <Grid Background="#FF1D2533">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBox x:Name="TBSearch" Width="400" Height="40" Margin="10,10,0,0" FontSize="24"></TextBox>
+            <Button x:Name="BtnSearch" Width="150" Height="40" Margin="20,10,0,0" FontSize="24" Background="#FF5DD3E2" Click="BtnSearch_Click">Поиск</Button>
+            <TextBlock FontSize="16" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">По типу</TextBlock>
+            <ComboBox x:Name="CBTypeFilter" SelectionChanged="CBTypeFilter_SelectionChanged" Width="200" Height="40" Margin="10,10,0,0" MaxDropDownHeight="320">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Type1}" Style="{StaticResource Roboto}" FontSize="24"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock FontSize="16" Margin="20,0,0,0" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">По бренду</TextBlock>
+            <ComboBox x:Name="CBBrandFilter" SelectionChanged="CBBrandFilter_SelectionChanged" Width="200" Height="40" Margin="10,10,0,0" MaxDropDownHeight="320">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Brand1}" Style="{StaticResource Roboto}" FontSize="24"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock FontSize="16" Margin="20,0,0,0" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">Сортировка</TextBlock>
+            <ComboBox x:Name="CBSort"  Height="40" Width="200" FontSize="24" Margin="20,10,0,0" SelectionChanged="CBSort_SelectionChanged">
+                <Label FontFamily="Roboto" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">По умолчанию</Label>
+                <Label FontFamily="Roboto" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">По имени</Label>
+                <Label FontFamily="Roboto" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">По цене</Label>
+            </ComboBox>
+            <Button x:Name="BtnClear" Width="150" Height="40" Margin="20,10,0,0" FontSize="24" Background="#FFC95DE2" Click="BtnClear_Click">Очистить</Button>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <ListBox x:Name="ListDetail" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" SelectionChanged="ListDetail_SelectionChanged" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Margin="5,5,5,5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                            <Image Width="75" Height="75" Source="{Binding Path=Image}"/>
+                            <StackPanel Margin="10,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Detail}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Type}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text="{Binding Path=Brand}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Price}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <ListBox x:Name="ListConfig" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="5,5,5,5" SelectionChanged="ListConfig_SelectionChanged" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                            <Image Width="75" Height="75" Source="{Binding Path=DetailImage}"/>
+                            <StackPanel Margin="50,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Detail}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Type}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text="{Binding Path=Brand}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Count}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text=" Шт." Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text="{Binding Path=DetailPrice}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="18" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>

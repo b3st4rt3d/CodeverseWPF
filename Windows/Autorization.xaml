@@ -1,0 +1,29 @@
+﻿<Window x:Class="CodeverseWPF.Windows.Autorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeverseWPF.Windows"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Windows/logo-codeverse.jpg">
+    <Grid Background="#FF1D2533" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource Roboto}" HorizontalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="40" HorizontalAlignment="Center" Margin="0,45,0,0" >Авторизация</TextBlock>
+            <TextBlock FontSize="24" Foreground="White" Margin="0,90,0,0" FontWeight="Light">Логин</TextBlock>
+            <TextBox x:Name="Login" TextWrapping="Wrap" Width="400" Height="45" FontSize="24" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="24" Foreground="White" Margin="0,45,0,0" FontWeight="Light">Пароль</TextBlock>
+            <PasswordBox x:Name="Password" Width="400" Height="45" FontSize="24" HorizontalAlignment="Center"></PasswordBox>
+            <Button x:Name="Enter" Width="200" Height="60" Margin="0,60,0,0" Click="Enter_Click" Background="#FF68E1FC" FontSize="24" Content="Войти" BorderBrush="{x:Null}" Foreground="White"/>
+            <Button x:Name="Registration" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{StaticResource Montserrat}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">Регистрация</Button>
+        </StackPanel>
+    </Grid>
+</Window>
