@@ -1,4 +1,5 @@
-﻿using CodeverseWPF.MainWindow;
+﻿using CodeverseWPF.DB;
+using CodeverseWPF.MainWindow;
 using CodeverseWPF.Utils;
 using System.Windows;
 using System.Windows.Media;
@@ -33,22 +34,21 @@ namespace CodeverseWPF.Windows
                 return;
             }
 
-            string hashPassword = Hashing.HashingPassword(password);
+            string hashPassword = Hashing.Encrypt(password);
 
             using (CodeverseContext db = new CodeverseContext())
             {
                 var user = db.Employees.FirstOrDefault(
-                    p => p.Login == login && p.Password == hashPassword);
+                    p => p.Login == login 
+                    && p.Password == hashPassword);
+
                 if (user != null)
                 {
-                    var mainWindow = new Main();
+                    var mainWindow = new Main(user);
                     mainWindow.Show();
                     Close();
                 }
-                else
-                {
-                    MessageBox.Show("Неправильный логин или пароль.");
-                }
+                else MessageBox.Show("Неправильный логин или пароль.");
             }            
         }        
     }

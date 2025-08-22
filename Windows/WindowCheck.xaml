@@ -1,0 +1,60 @@
+﻿<Window x:Class="CodeverseWPF.Windows.WindowCheck"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeverseWPF.Windows"
+        mc:Ignorable="d"
+        Width="600" ShowInTaskbar="False" SizeToContent="Height" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <WrapPanel Margin="0,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="550">
+                <Button x:Name="BtnPrint" Height="25" Width="100" Background="#FFCAFFBF" FontSize="16" Foreground="#FF222325" Click="BtnPrint_Click">Печать</Button>
+                <Button x:Name="BtnClose" Height="25" Width="100" Background="#FFFFADAD" FontSize="16" Foreground="#FF222325" Click="BtnClose_Click" Margin="25,0,0,0">Закрыть</Button>
+            </WrapPanel>
+            <WrapPanel x:Name="WPMain" Grid.Column="0" Orientation="Vertical" Style="{StaticResource Roboto}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Height="100" Width="600" Source="/Windows/Frame 15.png" Margin="0,20,0,0"/>
+                <TextBlock FontWeight="Bold" FontSize="24" TextAlignment="Center" Foreground="#FF2A2E35" Margin="0,20,0,0">ТОВАРНЫЙ ЧЕК</TextBlock>
+                <WrapPanel Style="{StaticResource Roboto}" Margin="0,20,0,20" Width="550">
+                    <WrapPanel>
+                        <WrapPanel Orientation="Vertical" Width="275">
+                            <TextBlock Foreground="#FF2A2E35" FontWeight="Bold" FontSize="18">Данные клиента</TextBlock>
+                            <TextBlock x:Name="TBClientName" FontSize="16">ФИО Нгуен Хоанг Ши Тхиеу</TextBlock>
+                            <TextBlock x:Name="TBClientPhone" FontSize="16">Телефон +1-953-693-35-55</TextBlock>
+                            <TextBlock x:Name="TBClientEmail" FontSize="16">Email Ddatxn1092@gmail.com</TextBlock>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Vertical" Width="275">
+                            <TextBlock Foreground="#FF2A2E35" FontWeight="Bold" FontSize="18">Данные заказа</TextBlock>
+                            <TextBlock x:Name="TBOrderID" FontSize="16">Номер заказа №565</TextBlock>
+                            <TextBlock x:Name="TBOrderDateStart" FontSize="16">Дата приема 23.02.2023</TextBlock>
+                            <TextBlock x:Name="TBOrderDateEnd" FontSize="16">Дата выполнения 25.02.2023</TextBlock>
+                        </WrapPanel>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,5,0,0">
+                        <WrapPanel Orientation="Vertical" Width="275">
+                            <TextBlock Foreground="#FF2A2E35" FontWeight="Bold" FontSize="18">Данные мастера</TextBlock>
+                            <TextBlock x:Name="TBMasterName" FontSize="16">ФИО Митрофанов Д.А.</TextBlock>
+                            <TextBlock x:Name="TBMasterPosition" FontSize="16">Должность Мастер</TextBlock>
+                        </WrapPanel>
+                    </WrapPanel>
+                </WrapPanel>
+                <TextBlock FontSize="21" TextAlignment="Center" Foreground="#FF2A2E35" FontWeight="Bold" Margin="0,20,0,0">Перечень услуг и комплектующих</TextBlock>
+                <TextBlock FontSize="16" Foreground="#FF2A2E35" FontWeight="Bold" Margin="0,10,0,0" Width="550">Компьютеры</TextBlock>
+                <DataGrid x:Name="DGItems" Width="590" FontSize="18" Margin="0,10,0,0" ItemsSource="{Binding Mode=OneWay}"/>
+                <TextBlock FontSize="16" Foreground="#FF2A2E35" FontWeight="Bold" Margin="0,10,0,0" Width="550">Услуги</TextBlock>
+                <DataGrid x:Name="DGServices" Width="590" FontSize="18" Margin="0,10,0,0" ItemsSource="{Binding Mode=OneWay}" />
+                <TextBlock FontSize="16" Foreground="#FF2A2E35" FontWeight="Bold" Margin="0,10,0,0" Width="550">Детали</TextBlock>
+                <DataGrid x:Name="DGDetails" Width="590" FontSize="18" Margin="0,10,0,0" ItemsSource="{Binding Mode=OneWay}" />
+                <WrapPanel Width="500" Margin="0,20,0,50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <WrapPanel Width="250">
+                        <TextBlock x:Name="TBSum" Foreground="#FF2A2E35" FontWeight="Bold" FontSize="18">ИТОГО 25000 Руб.</TextBlock>
+                        <TextBlock x:Name="TBDateCheckPay"  FontSize="16">Дата оплаты 26.02.2023</TextBlock>
+                        <TextBlock FontSize="16">Подпись получателя _______________</TextBlock>
+                        <TextBlock FontSize="16">Подпись клиента _______________</TextBlock>
+
+                    </WrapPanel>
+                </WrapPanel>
+            </WrapPanel>
+        </WrapPanel>
+    </Grid>
+</Window>

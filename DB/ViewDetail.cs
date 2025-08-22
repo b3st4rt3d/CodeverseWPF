@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class ViewDetail
 {
@@ -22,4 +22,6 @@ public partial class ViewDetail
     public string Brand { get; set; } = null!;
 
     public byte[]? Image { get; set; }
+
+    public int? Count { get; set; }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CodeverseWPF.Windows"
         mc:Ignorable="d"
         Title="Типы" Height="800" Width="800" WindowStartupLocation="CenterScreen" Icon="/Windows/logo-codeverse.jpg">
-    <Grid Background="#FF1D2533">
+    <Grid Background="#FFB3D9FF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1*"/>
@@ -18,8 +18,8 @@
 
         <StackPanel Style="{StaticResource Roboto}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBox x:Name="TBSearch" Width="500" Height="45" FontSize="20" Margin="25,0,0,0"></TextBox>
-            <Button x:Name="BtnSearch" Margin="25,0,0,0" Height="45" Width="100" Background="#FF90F16E" FontSize="20" Click="BtnSearch_Click">Поиск</Button>
-            <Button x:Name="BtnClear" Margin="25,0,0,0" Height="45" Width="100" Background="#FFE0DB6B" FontSize="20" Click="BtnClear_Click">Очистить</Button>
+            <Button x:Name="BtnSearch" Margin="25,0,0,0" Height="45" Width="100" Background="#FFCAFFBF" FontSize="20" Click="BtnSearch_Click">Поиск</Button>
+            <Button x:Name="BtnClear" Margin="25,0,0,0" Height="45" Width="100" Background="#FFBDB2FF" FontSize="20" Click="BtnClear_Click">Очистить</Button>
         </StackPanel>
 
         <ListBox x:Name="ListTypes" Grid.Row="1" Grid.Column="0" Margin="5,20,5,20">
@@ -34,11 +34,11 @@
 
         <StackPanel Style="{StaticResource Roboto}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox x:Name="TBName" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Height="50"></TextBox>
-            <Button x:Name="BtnCreate" Margin="0,25,0,0" Height="45" Width="250" Background="#FF51C5BD" FontSize="20" Foreground="#FF222325" Click="BtnCreate_Click">Добавить</Button>
-            <Button x:Name="BtnDelete" Margin="0,25,0,0" Height="45" Width="250" Background="#FF51C5BD" FontSize="20" Foreground="#FF222325" Click="BtnDelete_Click">Удалить</Button>
-            <Button x:Name="BtnChange" Margin="0,25,0,0" Height="45" Width="250" Background="#FF51C5BD" FontSize="20" Foreground="#FF222325" Click="BtnChange_Click">Изменить</Button>
-            <Button x:Name="BtnSave" Margin="0,25,0,0" Height="45" Width="250" Background="#FF51C5BD" FontSize="20" Foreground="#FF222325" Click="BtnSave_Click" Visibility="Collapsed">Сохранить</Button>
-            <Button x:Name="BtnReturn" Margin="0,25,0,0" Height="45" Width="250" Background="#FF51C5BD" FontSize="20" Foreground="#FF222325" Click="BtnReturn_Click"  Visibility="Collapsed">Отмена</Button>
+            <Button x:Name="BtnCreate" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnCreate_Click">Добавить</Button>
+            <Button x:Name="BtnDelete" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnDelete_Click">Удалить</Button>
+            <Button x:Name="BtnChange" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnChange_Click">Изменить</Button>
+            <Button x:Name="BtnSave" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnSave_Click" Visibility="Collapsed">Сохранить</Button>
+            <Button x:Name="BtnReturn" Margin="0,25,0,0" Height="45" Width="250" Background="#FFFFADAD" FontSize="20" Foreground="#FF222325" Click="BtnReturn_Click"  Visibility="Collapsed">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class Client
 {
@@ -10,10 +10,6 @@ public partial class Client
     public string Name { get; set; } = null!;
 
     public string Surname { get; set; } = null!;
-
-    public string? Login { get; set; }
-
-    public string? Password { get; set; }
 
     public string? Phone { get; set; }
 

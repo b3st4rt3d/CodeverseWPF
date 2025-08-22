@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class Employee
 {
@@ -18,6 +18,8 @@ public partial class Employee
     public string? Email { get; set; }
 
     public int? PositionId { get; set; }
+
+    public byte[]? Image { get; set; }
 
     public virtual ICollection<OrderEmployee> OrderEmployees { get; set; } = new List<OrderEmployee>();
 

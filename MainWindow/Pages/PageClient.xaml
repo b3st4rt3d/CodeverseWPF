@@ -8,7 +8,7 @@
       d:DesignHeight="1064" d:DesignWidth="1680"
       Title="PageClient">
 
-    <Grid Background="#FF101828">
+    <Grid Background="#FFB3D9FF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -16,19 +16,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="90*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Montserrat}" Orientation="Horizontal" Height="60" VerticalAlignment="Top">
             <StackPanel x:Name="SPMainBtns" Orientation="Horizontal">
                 <TextBox x:Name="TBSearch" Width="400" Height="40" Margin="25,0,0,0" FontSize="24"></TextBox>
-                <Button x:Name="BtnSearch" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF5DD3E2" Click="BtnSearch_Click">Поиск</Button>
-                <Button x:Name="BtnClear" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFB05DE2" Click="BtnClear_Click">Очистить</Button>
-                <Button x:Name="BtnCreate" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF90F16E" Click="BtnCreate_Click">Добавить</Button>
-                <Button x:Name="BtnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2DD5D" Click="BtnChange_Click">Изменить</Button>
-                <Button x:Name="BtnDelete" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2755D" Click="BtnDelete_Click">Удалить</Button>
+                <Button x:Name="BtnSearch" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF9BF6FF" Click="BtnSearch_Click">Поиск</Button>
+                <Button x:Name="BtnClear" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFBDB2FF" Click="BtnClear_Click">Очистить</Button>
+                <Button x:Name="BtnCreate" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnCreate_Click">Добавить</Button>
+                <Button x:Name="BtnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnChange_Click" IsEnabled="False">Изменить</Button>
+                <Button x:Name="BtnDelete" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnDelete_Click" IsEnabled="False">Удалить</Button>
             </StackPanel>
-            <StackPanel x:Name="SPChangeBtns" Orientation="Horizontal">
+            <StackPanel x:Name="SPChangeBtns" Orientation="Horizontal" Visibility="Collapsed">
                 <Button x:Name="BtnCompleteChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF90F16E" Click="BtnCompleteChange_Click">Сохранить</Button>
                 <Button x:Name="BtnReturnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2755D" Click="BtnReturnChange_Click">Отмена</Button>
             </StackPanel>
@@ -60,34 +60,27 @@
 
         <StackPanel Style="{StaticResource Roboto}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,25,0" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Имя</TextBlock>
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Имя</TextBlock>
                 <TextBox x:Name="TBName" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Фамилия</TextBlock>
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Фамилия</TextBlock>
                 <TextBox x:Name="TBSurname" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Почта</TextBlock>
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Почта</TextBlock>
                 <TextBox x:Name="TBEmail" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Телефон</TextBlock>
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Телефон</TextBlock>
                 <TextBox x:Name="TBPhone" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Логин</TextBlock>
-                <TextBox x:Name="TBLogin" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Пароль</TextBlock>
-                <TextBox x:Name="TBPassword" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
-            </StackPanel>
+
         </StackPanel>
 
         <StackPanel Style="{StaticResource Montserrat}" Grid.Column="0" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-            <TextBlock FontSize="24" Foreground="#FFE27F7F" Margin="25,0,0,0">Последние действия:</TextBlock>
-            <TextBlock x:Name="ResentAct" FontSize="24" Foreground="#FFE27F7F" Margin="25,0,0,0">Последние действия:</TextBlock>
+            <TextBlock FontSize="18" Foreground="#FFF90505" Margin="25,0,0,0">Последние действия:</TextBlock>
+            <TextBlock x:Name="ResentAct" FontSize="18" Foreground="#FFF90505" Margin="25,0,0,0"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

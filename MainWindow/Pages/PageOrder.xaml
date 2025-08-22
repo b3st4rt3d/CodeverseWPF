@@ -8,49 +8,67 @@
       d:DesignHeight="1064" d:DesignWidth="1680"
       Title="PageOrder">
 
-    <Grid Background="#FF101828">
+    <Grid Background="#FFB3D9FF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="11*"/>
             <RowDefinition Height="90*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Montserrat}" Orientation="Horizontal" Height="60" VerticalAlignment="Top">
-            <StackPanel x:Name="SPMainBtns" Orientation="Horizontal">
-                <TextBox x:Name="TBSearch" Width="400" Height="40" Margin="25,0,0,0" FontSize="24"></TextBox>
-                <Button x:Name="BtnSearch" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF5DD3E2" Click="BtnSearch_Click">Поиск</Button>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Montserrat}" Height="100" VerticalAlignment="Top">
+            <StackPanel x:Name="SPFilterBtns" Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox x:Name="TBSearch" Width="400" Height="40" Margin="25,0,0,0" FontSize="24"/>
+                <Button x:Name="BtnSearch" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF9BF6FF" Click="BtnSearch_Click">Поиск</Button>
+                <TextBlock FontSize="16" Margin="20,0,0,0" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">По состоянию</TextBlock>
+                <ComboBox x:Name="CBStateFilter" SelectionChanged="CBStateFilter_SelectionChanged" Width="300" Height="40" Margin="10,0,0,0" MaxDropDownHeight="320">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=State1}" Style="{StaticResource Roboto}" FontSize="24"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button x:Name="BtnShowAll" Width="300" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFFFD6A5" Click="BtnShowAll_Click">Показать закрытые</Button>
                 <Button x:Name="BtnClear" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFB05DE2" Click="BtnClear_Click">Очистить</Button>
-                <Button x:Name="BtnCreate" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF90F16E" Click="BtnCreate_Click">Добавить</Button>
-                <Button x:Name="BtnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2DD5D" Click="BtnChange_Click">Изменить</Button>
-                <Button x:Name="BtnDelete" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2755D" Click="BtnDelete_Click">Удалить</Button>
             </StackPanel>
-            <StackPanel x:Name="SPChangeBtns" Orientation="Horizontal">
-                <Button x:Name="BtnCompleteChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF90F16E" Click="BtnCompleteChange_Click">Сохранить</Button>
-                <Button x:Name="BtnReturnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2755D" Click="BtnReturnChange_Click">Отмена</Button>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <StackPanel x:Name="SPMainBtns" Orientation="Horizontal">
+                    <Button x:Name="BtnCheck" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFFFD380" Click="BtnCheck_Click" IsEnabled="False">Чек</Button>
+                    <Button x:Name="BtnCreate" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnCreate_Click">Добавить</Button>
+                    <Button x:Name="BtnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnChange_Click" IsEnabled="False">Изменить</Button>
+                    <Button x:Name="BtnDelete" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFCAFFBF" Click="BtnDelete_Click" IsEnabled="False">Удалить</Button>
+                    <Button x:Name="BtnServices" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFFFD6A5" Click="BtnServices_Click">Услуги</Button>
+                </StackPanel>
+                <StackPanel x:Name="SPChangeBtns" Orientation="Horizontal" Visibility="Collapsed">
+                    <Button x:Name="BtnCompleteChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FF90F16E" Click="BtnCompleteChange_Click">Сохранить</Button>
+                    <Button x:Name="BtnReturnChange" Width="150" Height="40" Margin="25,0,0,0" FontSize="24" Background="#FFE2755D" Click="BtnReturnChange_Click">Отмена</Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
-        <ListBox x:Name="ListClient" Grid.Column="0" Grid.Row="1" Width="800" Height="850" HorizontalAlignment="Left" Margin="25,0,0,0">
+        <ListBox x:Name="ListOrder" Grid.Column="0" Grid.Row="1" Width="800" Height="850" HorizontalAlignment="Left" Margin="25,0,0,0" Background="{x:Null}" SelectionChanged="ListOrder_SelectionChanged" BorderBrush="{x:Null}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
-                        <StackPanel Margin="50,0,0,0">
+                    <StackPanel Margin="5,5,5,5" Orientation="Horizontal" Background="{Binding Path=Background}" Width="700" >
+                        <StackPanel Margin="50,25,50,25">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="24" Text="Имя и фамилия - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
-                                <TextBlock FontSize="24" Text="{Binding Path=Name}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
-                                <TextBlock FontSize="24" Text="{Binding Path=Surname}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                <TextBlock FontSize="24" Text="Заказ - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                <TextBlock FontSize="24" Text="{Binding Path=OrderId}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                <TextBlock FontSize="24" Text="  Дата - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                <TextBlock FontSize="24" Text="{Binding Path=Date}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="24" Text="Номер телефона - " Margin="10,0,0,0"></TextBlock>
-                                <TextBlock FontSize="24" Text="{Binding Path=Phone}" Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text="Клиент - " Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text="{Binding Path=Surname}" Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text="{Binding Path=Name}" Margin="10,0,0,0"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="24" Text="Электронная почта - " Margin="10,0,0,0"></TextBlock>
-                                <TextBlock FontSize="24" Text="{Binding Path=Email}" Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text="Итого - " Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text="{Binding Path=Total}" Margin="10,0,0,0"></TextBlock>
+                                <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
@@ -60,34 +78,130 @@
 
         <StackPanel Style="{StaticResource Roboto}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,25,0" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Имя</TextBlock>
-                <TextBox x:Name="TBName" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">№ заказа</TextBlock>
+                <TextBox x:Name="TBOrderID" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Фамилия</TextBlock>
-                <TextBox x:Name="TBSurname" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Дата</TextBlock>
+                <DatePicker Name="DPDate" FontSize="24" Width="400" Height="40" Margin="50,0,0,0"></DatePicker>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Почта</TextBlock>
-                <TextBox x:Name="TBEmail" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Статус</TextBlock>
+                <ComboBox x:Name="CBState" Width="400" Height="40" Margin="50,0,0,0" MaxDropDownHeight="320">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=State1}" Style="{StaticResource Roboto}" FontSize="24"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Телефон</TextBlock>
-                <TextBox x:Name="TBPhone" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Итого</TextBlock>
+                <TextBox x:Name="TBTotal" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Логин</TextBlock>
-                <TextBox x:Name="TBLogin" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,0">
+                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Клиент</TextBlock>
+                <TextBox x:Name="TBClient" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,0">
-                <TextBlock Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="White">Пароль</TextBlock>
-                <TextBox x:Name="TBPassword" Width="400" Height="40" Margin="50,0,0,0" FontSize="24"/>
+            <StackPanel x:Name="SPDevices" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" Foreground="Black">Список компьютеров</TextBlock>
+                    <Button x:Name="BtnChangeDevices" Width="200" Height="30" Click="BtnChangeDevices_Click" FontSize="18" Background="#FFB6E8C7" Margin="50,0,0,0">Изменить</Button>
+                </StackPanel>
+                <ListBox x:Name="ListDevices" Width="650" Margin="0,20,0,0" Height="400" Background="{x:Null}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                                <Image Width="75" Height="75" Source="{Binding Path=Image}"></Image>
+                                <StackPanel Margin="50,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="Компьютер - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                        <TextBlock FontSize="24" Text="{Binding Path=Device}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="Цена - " Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="24" Text="{Binding Path=Price}" Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="Количество - " Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="24" Text="{Binding Path=Count}" Margin="10,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel x:Name="SPDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36">Список компьютеров</TextBlock>
+                    <Button x:Name="BtnChangeDetails" Width="200" Height="30" Click="BtnChangeDetails_Click" FontSize="18" Background="#FFB6E8C7" Margin="50,0,0,0">Изменить</Button>
+                </StackPanel>
+                <ListBox x:Name="ListDetails" Width="650" Margin="0,20,0,0" Height="400" Background="{x:Null}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                                <Image Width="100" Height="100" Source="{Binding Path=Image}"/>
+                                <StackPanel Margin="30,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="20" Text="{Binding Path=Detail}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="20" Text="{Binding Path=Type}" Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="20" Text="{Binding Path=Brand}" Margin="10,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="20" Text="Цена - " Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="20" Text="{Binding Path=Price}" Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="20" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="20" Text="Количество " Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="20" Text="{Binding Path=Count}" Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="20" Text=" шт." Margin="10,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel x:Name="SPServices" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36">Список компьютеров</TextBlock>
+                    <Button x:Name="BtnChangeService" Width="200" Height="30" Click="BtnChangeService_Click" FontSize="18" Background="#FFB6E8C7" Margin="50,0,0,0">Изменить</Button>
+                </StackPanel>
+                <ListBox x:Name="ListServices" Width="650" Margin="0,20,0,0" Height="400" Background="{x:Null}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                                <StackPanel Margin="0,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="Услуга - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                        <TextBlock FontSize="24" Text="{Binding Path=Service}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="24" Text="Цена - " Margin="10,0,0,0"></TextBlock>
+                                        <TextBlock FontSize="24" Text="{Binding Path=Price}" Margin="10,0,0,0" ></TextBlock>
+                                        <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0" ></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="BtnDevices" Width="200" Height="30" Click="BtnDevices_Click" FontSize="18" Background="#FFCAFFBF" Margin="0,20,0,0" IsEnabled="False">Устройства</Button>
+                <Button x:Name="BtnService" Width="200" Height="30" Click="BtnService_Click" FontSize="18" Background="#FFCAFFBF" Margin="20,20,0,0">Услуги</Button>
+                <Button x:Name="BtnDetails" Width="200" Height="30" Click="BtnDetails_Click" FontSize="18" Background="#FFCAFFBF" Margin="20,20,0,0">Детали</Button>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Style="{StaticResource Montserrat}" Grid.Column="0" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-            <TextBlock FontSize="24" Foreground="#FFE27F7F" Margin="25,0,0,0">Последние действия:</TextBlock>
-            <TextBlock x:Name="ResentAct" FontSize="24" Foreground="#FFE27F7F" Margin="25,0,0,0">Последние действия:</TextBlock>
+            <TextBlock FontSize="18" Foreground="#FFF90505" Margin="25,0,0,0">Последние действия:</TextBlock>
+            <TextBlock x:Name="ResentAct" FontSize="18" Foreground="#FFF90505" Margin="25,0,0,0"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

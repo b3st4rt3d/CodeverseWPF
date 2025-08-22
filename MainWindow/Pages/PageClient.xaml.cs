@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CodeverseWPF.DB;
+using CodeverseWPF.Utils;
 
 namespace CodeverseWPF.MainWindow.Pages
 {
@@ -55,8 +57,9 @@ namespace CodeverseWPF.MainWindow.Pages
                 var surname = TBSurname.Text.Trim();
                 var email = TBEmail.Text.Trim();
                 var phone = TBPhone.Text.Trim();
-                var login = TBLogin.Text.Trim();
-                var password = TBPassword.Text.Trim();
+
+                if (!Validate.IsValidEmail(email)) return;
+                if (!Validate.IsValidPhoneNumber(phone)) return;
 
                 if (string.IsNullOrEmpty(name)
                     || string.IsNullOrEmpty(surname)
@@ -69,8 +72,6 @@ namespace CodeverseWPF.MainWindow.Pages
                         Surname = surname,
                         Email = email,
                         Phone = phone,
-                        Login = login,
-                        Password = password
                     };
                     using (CodeverseContext db = new CodeverseContext())
                     {
@@ -107,6 +108,13 @@ namespace CodeverseWPF.MainWindow.Pages
                         {
                             var client = db.Clients
                                 .FirstOrDefault(p => p.ClientId == _selectedClient.ClientId);
+                            var order = db.Orders
+                                .FirstOrDefault(p => p.ClientId == _selectedClient.ClientId);
+                            if(order != null)
+                            {
+                                MessageBox.Show("Клиент используется в системе, удаление отменено.");
+                                return;
+                            }
                             if(client != null)
                             {
                                 db.Clients.Remove(client);
@@ -130,8 +138,6 @@ namespace CodeverseWPF.MainWindow.Pages
                 var surname = TBSurname.Text.Trim();
                 var email = TBEmail.Text.Trim();
                 var phone = TBPhone.Text.Trim();
-                var login = TBLogin.Text.Trim();
-                var password = TBPassword.Text.Trim();
 
                 if (string.IsNullOrEmpty(name)
                     || string.IsNullOrEmpty(surname)
@@ -139,7 +145,10 @@ namespace CodeverseWPF.MainWindow.Pages
                     || string.IsNullOrEmpty(phone)
                     || _selectedClient == null) MessageBox.Show("Заполните все поля");
                 else
-                {                    
+                {
+                    if (!Validate.IsValidEmail(email)) return;
+                    if (!Validate.IsValidPhoneNumber(phone)) return;
+
                     using (CodeverseContext db = new CodeverseContext())
                     {
                         var client = db.Clients
@@ -151,8 +160,6 @@ namespace CodeverseWPF.MainWindow.Pages
                             client.Surname = surname;
                             client.Email = email;
                             client.Phone = phone;
-                            client.Login = login;
-                            client.Password = password;
 
                             db.SaveChanges();
                             ClearTB();
@@ -188,8 +195,6 @@ namespace CodeverseWPF.MainWindow.Pages
             TBSurname.Clear();
             TBEmail.Clear();
             TBPhone.Clear();
-            TBLogin.Clear();
-            TBPassword.Clear();
         }
 
         private void ListClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -201,8 +206,8 @@ namespace CodeverseWPF.MainWindow.Pages
                 TBSurname.Text = _selectedClient.Surname;
                 TBEmail.Text = _selectedClient.Email;
                 TBPhone.Text = _selectedClient.Phone;
-                TBLogin.Text = _selectedClient.Login;
-                TBPassword.Text = _selectedClient.Password;
+                BtnChange.IsEnabled = true;
+                BtnDelete.IsEnabled = true;
             }
         }
     }

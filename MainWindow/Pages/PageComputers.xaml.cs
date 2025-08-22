@@ -1,21 +1,10 @@
-﻿using CodeverseWPF.Utils;
+﻿using CodeverseWPF.DB;
+using CodeverseWPF.Utils;
 using CodeverseWPF.Windows;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CodeverseWPF.MainWindow.Pages
 {
@@ -33,6 +22,7 @@ namespace CodeverseWPF.MainWindow.Pages
             SPChange.IsEnabled = false;
             BtnDelete.IsEnabled = false;
             BtnChange.IsEnabled = false;
+            SPChangeBtns.Visibility = Visibility.Collapsed;
         }
 
         private void Refresh()
@@ -92,34 +82,9 @@ namespace CodeverseWPF.MainWindow.Pages
 
         private void BtnChange_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (_selectedDevice != null)
-                {
-                    using (CodeverseContext db = new CodeverseContext())
-                    {
-                        var device = db.Devices
-                            .FirstOrDefault(p => p.DeviceId == _selectedDevice.DeviceId);
-                        var name = TBDevice.Text.Trim();
-                        var price = Convert.ToDecimal(TBPrice.Text.Trim());
-                        if (device != null 
-                            && !string.IsNullOrEmpty(name) 
-                            && price > 0)
-                        {
-                            device.Device1 = name;
-                            device.Price = price;
-                            device.Image = _imageData;
-                            db.SaveChanges();
-                            Refresh();
-                            ResentAct.Text = $"Изменен компьютер {name}.";
-                            SPChangeBtns.Visibility = Visibility.Visible;
-                            SPMainBtns.Visibility = Visibility.Collapsed;
-                            ListDevices.IsEnabled = false;
-                        }
-                    }
-                }
-            }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            SPChangeBtns.Visibility = Visibility.Visible;
+            SPMainBtns.Visibility = Visibility.Collapsed;
+            ListDevices.IsEnabled = false;
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -135,6 +100,13 @@ namespace CodeverseWPF.MainWindow.Pages
                     {
                         using (CodeverseContext db = new CodeverseContext())
                         {
+                            var orderDevice = db.OrderDevices
+                                .FirstOrDefault(p => p.DeviceId == _selectedDevice.DeviceId);
+                            if(orderDevice!= null)
+                            {
+                                MessageBox.Show("Компьютер используется в системе. Удаление отменено.");
+                                return;
+                            }
                             var device = db.Devices
                                 .FirstOrDefault(p => p.DeviceId == _selectedDevice.DeviceId);
                             var config = db.Configs
@@ -162,10 +134,38 @@ namespace CodeverseWPF.MainWindow.Pages
 
         private void BtnCompleteChange_Click(object sender, RoutedEventArgs e)
         {
-            SPChangeBtns.Visibility = Visibility.Collapsed;
-            SPMainBtns.Visibility = Visibility.Visible;
-            ListDevices.IsEnabled = true;
-            ClearTB();
+            try
+            {
+                if (_selectedDevice != null)
+                {
+                    using (CodeverseContext db = new CodeverseContext())
+                    {
+                        var device = db.Devices
+                            .FirstOrDefault(p => p.DeviceId == _selectedDevice.DeviceId);
+                        var name = TBDevice.Text.Trim();
+                        var price = Convert.ToDecimal(TBPrice.Text.Trim());
+                        if (device != null
+                            && !string.IsNullOrEmpty(name)
+                            && price > 0)
+                        {
+                            device.Device1 = name;
+                            device.Price = price;
+                            device.Image = _imageData;
+                            db.SaveChanges();
+                            Refresh();
+                            ResentAct.Text = $"Изменен компьютер {name}.";
+                            SPChangeBtns.Visibility = Visibility.Visible;
+                            SPMainBtns.Visibility = Visibility.Collapsed;
+                            ListDevices.IsEnabled = false;
+                        }
+                    }
+                    SPChangeBtns.Visibility = Visibility.Collapsed;
+                    SPMainBtns.Visibility = Visibility.Visible;
+                    ListDevices.IsEnabled = true;
+                    ClearTB();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void BtnReturnChange_Click(object sender, RoutedEventArgs e)
@@ -208,7 +208,11 @@ namespace CodeverseWPF.MainWindow.Pages
                 TBDevice.Text = _selectedDevice.Device1.Trim();
                 TBPrice.Text = _selectedDevice.Price.ToString();
                 byte[]? imageData = _selectedDevice.Image;                
-                if (imageData != null) Photo.Source = ImageTools.ByteToImage(imageData);
+                if (imageData != null)
+                {
+                    Photo.Source = ImageTools.ByteToImage(imageData);
+                    _imageData = imageData;
+                }
                 using (CodeverseContext db = new CodeverseContext())
                 {
                     var config = db.ViewConfigs
@@ -228,7 +232,7 @@ namespace CodeverseWPF.MainWindow.Pages
         {
             TBDevice.Clear();
             TBPrice.Clear();
-            ListConfig.Items.Clear();
+            ListConfig.ItemsSource = null;
         }
 
         private void BtnChangeConfig_Click(object sender, RoutedEventArgs e)

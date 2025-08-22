@@ -1,0 +1,123 @@
+﻿<Page x:Class="CodeverseWPF.MainWindow.Pages.PageAcceptOrder"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CodeverseWPF.MainWindow.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1064" d:DesignWidth="1680"
+      Title="PageOrder">
+
+    <Grid Background="#FFB3D9FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+
+        <WrapPanel Style="{Binding Path=Roboto}" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button x:Name="BtnAcceptOrder" Content="Принять" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" IsEnabled="False" Click="BtnAcceptOrder_Click" FontSize="20"/>
+                <Button x:Name="BtnRefusalOrder" Content="Отказаться" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" IsEnabled="False" Click="BtnRefusalOrder_Click" FontSize="20"/>
+                <Button x:Name="BtnCompleteOrder" Content="Завершить" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" IsEnabled="False" Click="BtnCompleteOrder_Click" FontSize="20"/>
+                <Button x:Name="BtnShowClient" Content="Показать клиента" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5"  Click="BtnShowClient_Click" FontSize="20" />
+                <Button x:Name="BtnWaitClietOrder" Content="Ожидание клиента" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" IsEnabled="False" Click="BtnWaitClietOrder_Click" FontSize="20"/>
+                <Button x:Name="BtnIssuedOrder" Content="Выдан" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" IsEnabled="False" Click="BtnIssuedOrder_Click" FontSize="20"/>
+                <Button x:Name="BtnShowInfo" Content="Подробно" Margin="5" Width="200" Height="40" BorderBrush="{x:Null}" Foreground="Black" Background="#FFFFD6A5" Click="BtnShowInfo_Click" FontSize="20"/>
+            </StackPanel>
+        </WrapPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-6,0,0" >
+            <TextBlock x:Name="TBLeft"  HorizontalAlignment="Center" Text="Новые заказы" VerticalAlignment="Top" Foreground="Black" FontSize="32" Width="320" TextAlignment="Center" Margin="0,5,0,20"/>
+            <ListBox x:Name="ListNewOrder" HorizontalAlignment="Left" Margin="25,0,0,0" Background="{x:Null}" SelectionChanged="ListNewOrder_SelectionChanged" BorderBrush="{x:Null}" Height="850">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,5,5,5" Orientation="Horizontal" Background="{Binding Path=Background}">
+                            <StackPanel Margin="50,25,50,25">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Заказ - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=OrderId}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Дата - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Date}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Статус - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=State}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Итого - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Total}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock x:Name="TBCenter"  HorizontalAlignment="Center" Text="Принятые заказы" VerticalAlignment="Top" Foreground="Black" FontSize="32" Width="320" TextAlignment="Center" Margin="0,5,0,20"/>
+            <ListBox x:Name="ListAcceptOrder" HorizontalAlignment="Left" Margin="25,0,0,0" Background="{x:Null}" SelectionChanged="ListAcceptOrder_SelectionChanged" BorderBrush="{x:Null}" Height="850">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,5,5,5" Orientation="Horizontal" Background="{Binding Path=Background}">
+                            <StackPanel Margin="50,25,50,25">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Заказ - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=OrderId}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Дата - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Date}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Статус - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=State}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Итого - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Total}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock x:Name="TBRight"  HorizontalAlignment="Center" Text="Отданные заказы" VerticalAlignment="Top" Foreground="Black" FontSize="32" Width="320" TextAlignment="Center" Margin="0,5,0,20"/>
+            <ListBox x:Name="ListCompleteOrder" HorizontalAlignment="Left" Margin="25,0,0,0" Background="{x:Null}" SelectionChanged="ListCompleteOrder_SelectionChanged" BorderBrush="{x:Null}" Height="850">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,5,5,5" Orientation="Horizontal" Background="{Binding Path=Background}">
+                            <StackPanel Margin="50,25,50,25">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Заказ - " Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=OrderId}" Margin="10,0,0,0" FontWeight="Bold"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Дата - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Date}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Статус - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=State}" Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="24" Text="Итого - " Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text="{Binding Path=Total}" Margin="10,0,0,0"></TextBlock>
+                                    <TextBlock FontSize="24" Text=" Руб." Margin="10,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Page>

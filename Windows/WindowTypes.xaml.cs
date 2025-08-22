@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using CodeverseWPF.DB;
+using Type = CodeverseWPF.DB.Type;
 
 namespace CodeverseWPF.Windows
 {
@@ -86,8 +88,8 @@ namespace CodeverseWPF.Windows
         {
             try
             {
-                var selectedBrand = ListTypes.SelectedItem as Type;
-                if (selectedBrand != null)
+                var selectedType = ListTypes.SelectedItem as Type;
+                if (selectedType != null)
                 {
                     if (MessageBox.Show("Если вы удалите тип, его нельзя будет восстановить. Удалить тип?",
                     "Удаление типа",
@@ -96,8 +98,16 @@ namespace CodeverseWPF.Windows
                     {
                         using (CodeverseContext db = new CodeverseContext())
                         {
+                            var detail = db.Details
+                                .FirstOrDefault(p => p.TypeId == selectedType.TypeId);
+                            if (detail != null)
+                            {
+                                MessageBox.Show("Тип используется в системе. Удаленине прервано.");
+                                return;
+                            }
+
                             var type = db.Types
-                                .FirstOrDefault(p => p.TypeId == selectedBrand.TypeId);
+                                .FirstOrDefault(p => p.TypeId == selectedType.TypeId);
                             if (type != null)
                             {
                                 db.Types.Remove(type);

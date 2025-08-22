@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using CodeverseWPF.DB;
 
 namespace CodeverseWPF.Windows
 {
@@ -96,6 +97,14 @@ namespace CodeverseWPF.Windows
                     {
                         using (CodeverseContext db = new CodeverseContext())
                         {
+                            var detail = db.Details
+                                .FirstOrDefault(p => p.BrandId == selectedBrand.BrandId);
+                            if(detail != null)
+                            {
+                                MessageBox.Show("Бренд используется в системе. Удаленине прервано.");
+                                return;
+                            }
+
                             var brand = db.Brands
                                 .FirstOrDefault(p => p.BrandId == selectedBrand.BrandId);
                             if (brand != null)

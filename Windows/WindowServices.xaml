@@ -1,0 +1,51 @@
+﻿<Window x:Class="CodeverseWPF.Windows.WindowServices"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeverseWPF.Windows"
+        mc:Ignorable="d"
+        Title="Услуги" Height="800" Width="800" WindowStartupLocation="CenterScreen" Icon="/Windows/logo-codeverse.jpg">
+    <Grid Background="#FFB3D9FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Style="{StaticResource Roboto}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBox x:Name="TBSearch" Width="500" Height="45" FontSize="20" Margin="25,0,0,0"></TextBox>
+            <Button x:Name="BtnSearch" Margin="25,0,0,0" Height="45" Width="100" Background="#FFCAFFBF" FontSize="20" Click="BtnSearch_Click" Foreground="Black">Поиск</Button>
+            <Button x:Name="BtnClear" Margin="25,0,0,0" Height="45" Width="100" Background="#FFBDB2FF" FontSize="20" Click="BtnClear_Click">Очистить</Button>
+        </StackPanel>
+
+        <ListBox x:Name="ListService" Grid.Row="1" Grid.Column="0" Margin="5,20,5,20">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5,5,5,5">
+                        <TextBlock Style="{StaticResource Roboto}" FontSize="24" Text="{Binding Path=Service1}"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource Roboto}" FontSize="24" Text="{Binding Path=Price}"></TextBlock>
+                            <TextBlock Text=" Руб." Style="{StaticResource Roboto}" FontSize="24" ></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Style="{StaticResource Roboto}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Название" FontSize="24" Foreground="Black"></TextBlock>
+            <TextBox x:Name="TBName" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Height="50" Margin="0,10,0,0"></TextBox>
+            <TextBlock Text="Цена" FontSize="24" Foreground="Black" Margin="0,20,0,0"></TextBlock>
+            <TextBox x:Name="TBPrice" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Height="50" Margin="0,10,0,0"></TextBox>
+            <Button x:Name="BtnCreate" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnCreate_Click">Добавить</Button>
+            <Button x:Name="BtnDelete" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnDelete_Click">Удалить</Button>
+            <Button x:Name="BtnChange" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnChange_Click">Изменить</Button>
+            <Button x:Name="BtnSave" Margin="0,25,0,0" Height="45" Width="250" Background="#FFCAFFBF" FontSize="20" Foreground="#FF222325" Click="BtnSave_Click" Visibility="Collapsed">Сохранить</Button>
+            <Button x:Name="BtnReturn" Margin="0,25,0,0" Height="45" Width="250" Background="#FFFFADAD" FontSize="20" Foreground="#FF222325" Click="BtnReturn_Click" Visibility="Collapsed">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

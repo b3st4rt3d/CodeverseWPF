@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CodeverseWPF.Windows"
         mc:Ignorable="d"
         Title="Авторизация" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Windows/logo-codeverse.jpg">
-    <Grid Background="#FF1D2533" >
+    <Grid Background="#FFB3D9FF" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="7*"/>
@@ -16,14 +16,13 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource Roboto}" HorizontalAlignment="Center">
-            <TextBlock Foreground="White" FontSize="40" HorizontalAlignment="Center" Margin="0,45,0,0" >Авторизация</TextBlock>
-            <TextBlock FontSize="24" Foreground="White" Margin="0,90,0,0" FontWeight="Light">Логин</TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource Roboto}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource Montserrat}" Foreground="#FF1F1F1F" FontSize="48" HorizontalAlignment="Center" Margin="0,45,0,0" >Авторизация</TextBlock>
+            <TextBlock FontSize="28" Foreground="#FF1F1F1F" Margin="0,70,0,0">Логин</TextBlock>
             <TextBox x:Name="Login" TextWrapping="Wrap" Width="400" Height="45" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBlock FontSize="24" Foreground="White" Margin="0,45,0,0" FontWeight="Light">Пароль</TextBlock>
+            <TextBlock FontSize="28" Foreground="#FF1F1F1F" Margin="0,40,0,0">Пароль</TextBlock>
             <PasswordBox x:Name="Password" Width="400" Height="45" FontSize="24" HorizontalAlignment="Center"></PasswordBox>
-            <Button x:Name="Enter" Width="200" Height="60" Margin="0,60,0,0" Click="Enter_Click" Background="#FF68E1FC" FontSize="24" Content="Войти" BorderBrush="{x:Null}" Foreground="White"/>
-            <Button x:Name="Registration" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{StaticResource Montserrat}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">Регистрация</Button>
+            <Button x:Name="Enter" Width="200" Height="60" Margin="0,60,0,0" Click="Enter_Click" Background="#FF476F95" FontSize="24" Content="Войти" BorderBrush="{x:Null}" Foreground="White"/>
         </StackPanel>
     </Grid>
 </Window>

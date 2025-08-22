@@ -1,0 +1,48 @@
+﻿<Page x:Class="CodeverseWPF.MainWindow.Pages.PageReports"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CodeverseWPF.MainWindow.Pages"
+      xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1064" d:DesignWidth="1680"
+      Title="PageClient">
+
+    <Grid Background="#FFB3D9FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Style="{StaticResource Montserrat}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Center">
+            <ComboBox x:Name="CBReport"  Height="40" Width="450" FontSize="24" Margin="50,0,0,0">
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Заказы мастеров</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Обороты по дням</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Обороты мастерской</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Выполненные заказы</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Популярные компьютеры</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Популярные услуги</Label>
+                <Label FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Популярные детали</Label>
+            </ComboBox>
+            <TextBlock x:Name="TBStartDate" FontSize="24" Margin="40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">Начало периода:</TextBlock>
+            <DatePicker x:Name="DpStartDate" FontSize="24" Margin="15,0,0,0" ></DatePicker>
+            <TextBlock x:Name="TBEndDate" FontSize="24" Margin="40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">Конец периода:</TextBlock>
+            <DatePicker x:Name="DPEndDate" FontSize="24" Margin="15,0,0,0" ></DatePicker>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource Montserrat}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="BtnCreateReport" Margin="0,0,50,0" FontSize="24" Height="45" Width="200" Background="#FFFFD380" Click="BtnCreateReport_Click" Foreground="Black">Сформировать</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel x:Name="SPPlot" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+                <ScottPlot:WpfPlot Width="1580" Height="850" x:Name="PlotReports" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button x:Name="BtnToPdf" Margin="0,15,0,0" FontSize="24" Height="45" Width="200" Background="#FFFFD380" Click="BtnToPdf_Click" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center">Сохранить</Button>
+        </StackPanel>
+    </Grid>
+</Page>

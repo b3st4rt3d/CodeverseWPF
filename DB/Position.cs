@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class Position
 {

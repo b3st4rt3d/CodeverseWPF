@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class Detail
 {
@@ -19,11 +19,15 @@ public partial class Detail
 
     public byte[]? Image { get; set; }
 
+    public int? Count { get; set; }
+
     public virtual Brand? Brand { get; set; }
 
     public virtual ICollection<Config> Configs { get; set; } = new List<Config>();
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
+    public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
 
     public virtual Type? Type { get; set; }
 }

@@ -6,23 +6,23 @@
         xmlns:local="clr-namespace:CodeverseWPF.Windows"
         mc:Ignorable="d"
         Title="Создание ПК" Height="700" Width="600" WindowStartupLocation="CenterScreen" Icon="/Windows/logo-codeverse.jpg">
-    <Grid Background="#FF1D2533">
+    <Grid Background="#FFB3D9FF">
         <StackPanel Style="{Binding Path=Montserrat}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel>
                 <Image x:Name="Photo" Width="300" Height="300" Source="/MainWindow/Pages/white.jpg"/>
-                <Button x:Name="BtnSelectImg" Margin="0,5,0,0" Width="200" Height="30" Click="BtnSelectImg_Click" FontSize="18" Background="#FFB6E8C7">Выбрать фото</Button>
+                <Button x:Name="BtnSelectImg" Margin="0,5,0,0" Width="200" Height="30" Click="BtnSelectImg_Click" FontSize="18" Background="#FFCAFFBF">Выбрать фото</Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                <TextBlock Width="150" Foreground="White" FontSize="24">Название</TextBlock>
+                <TextBlock Width="150" Foreground="Black" FontSize="24">Название</TextBlock>
                 <TextBox x:Name="TBName" Width="400" FontSize="24"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
-                <TextBlock Width="150" Foreground="White" FontSize="24">Цена</TextBlock>
+                <TextBlock Width="150" Foreground="Black" FontSize="24">Цена</TextBlock>
                 <TextBox x:Name="TBPrice" Width="400" FontSize="24"></TextBox>
             </StackPanel>
             <StackPanel Margin="0,50,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="Create" Content="Создать" FontSize="24" Background="#FF54D668" Width="200" Height="45" Click="Create_Click"></Button>
-                <Button x:Name="Return" Content="Отмена" FontSize="24" Background="#FFD65454" Width="200" Height="45" Margin="25,0,0,0" Click="Return_Click"></Button>
+                <Button x:Name="Create" Content="Создать" FontSize="24" Background="#FFCAFFBF" Width="200" Height="45" Click="Create_Click"></Button>
+                <Button x:Name="Return" Content="Отмена" FontSize="24" Background="#FFFFADAD" Width="200" Height="45" Margin="25,0,0,0" Click="Return_Click"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

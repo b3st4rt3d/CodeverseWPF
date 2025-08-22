@@ -1,12 +1,11 @@
-﻿using CodeverseWPF.Utils;
+﻿using CodeverseWPF.DB;
+using CodeverseWPF.Utils;
 using CodeverseWPF.Windows;
 using Microsoft.Win32;
 using System.IO;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using Type = CodeverseWPF.DB.Type;
 
 namespace CodeverseWPF.MainWindow.Pages
 {
@@ -113,7 +112,7 @@ namespace CodeverseWPF.MainWindow.Pages
             {
                 var detail = TBDetail.Text;
                 var price = Convert.ToDecimal(TBPrice.Text);
-                var description = TBDescription.Text;
+                var description = TBDescription.Text.ToString();
                 var type = CBType.SelectedItem as Type;
                 var brand = CBBrand.SelectedItem as Brand;
 
@@ -166,6 +165,15 @@ namespace CodeverseWPF.MainWindow.Pages
                     {
                         using (CodeverseContext db = new CodeverseContext())
                         {
+                            var orderDetail = db.OrderDetails
+                                .FirstOrDefault(p => p.DetailId == _selectedDetail.DetailId);
+
+                            if(orderDetail != null)
+                            {
+                                MessageBox.Show("Деталь используется в системе. Удаление отменено.");
+                                return;
+                            }
+
                             var detail = db.Details
                                 .FirstOrDefault(p => p.DetailId == _selectedDetail.DetailId);
                             if (detail != null)
@@ -299,12 +307,14 @@ namespace CodeverseWPF.MainWindow.Pages
         {
             WindowTypes windowTypes = new WindowTypes();
             windowTypes.ShowDialog();
+            Refresh();
         }
 
         private void BtnCreateBrands_Click(object sender, RoutedEventArgs e)
         {
             WindowBrands windowBrands = new WindowBrands();
             windowBrands.ShowDialog();
+            Refresh();
         }
 
         private void CBSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

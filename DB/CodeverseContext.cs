@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class CodeverseContext : DbContext
 {
@@ -18,6 +18,8 @@ public partial class CodeverseContext : DbContext
     public virtual DbSet<Brand> Brands { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
+
+    public virtual DbSet<CompletedOrder> CompletedOrders { get; set; }
 
     public virtual DbSet<Config> Configs { get; set; }
 
@@ -39,6 +41,22 @@ public partial class CodeverseContext : DbContext
 
     public virtual DbSet<Position> Positions { get; set; }
 
+    public virtual DbSet<ReportAverageTotal> ReportAverageTotals { get; set; }
+
+    public virtual DbSet<ReportCompletedOrder> ReportCompletedOrders { get; set; }
+
+    public virtual DbSet<ReportEmployeeOrderCount> ReportEmployeeOrderCounts { get; set; }
+
+    public virtual DbSet<ReportPopularDetail> ReportPopularDetails { get; set; }
+
+    public virtual DbSet<ReportPopularDevice> ReportPopularDevices { get; set; }
+
+    public virtual DbSet<ReportPopularService> ReportPopularServices { get; set; }
+
+    public virtual DbSet<ReportTurnover> ReportTurnovers { get; set; }
+
+    public virtual DbSet<Request> Requests { get; set; }
+
     public virtual DbSet<Service> Services { get; set; }
 
     public virtual DbSet<State> States { get; set; }
@@ -49,10 +67,21 @@ public partial class CodeverseContext : DbContext
 
     public virtual DbSet<ViewDetail> ViewDetails { get; set; }
 
+    public virtual DbSet<ViewDetailRequest> ViewDetailRequests { get; set; }
+
     public virtual DbSet<ViewEmployee> ViewEmployees { get; set; }
 
+    public virtual DbSet<ViewOrder> ViewOrders { get; set; }
+
+    public virtual DbSet<ViewOrderDetail> ViewOrderDetails { get; set; }
+
+    public virtual DbSet<ViewOrderDevice> ViewOrderDevices { get; set; }
+
+    public virtual DbSet<ViewOrderEmployee> ViewOrderEmployees { get; set; }
+
+    public virtual DbSet<ViewOrderService> ViewOrderServices { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Codeverse;Trusted_Connection=True;TrustServerCertificate=Yes");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,17 +108,27 @@ public partial class CodeverseContext : DbContext
 
             entity.HasIndex(e => e.Phone, "UQ__Client__5C7E359EA8CDCC28").IsUnique();
 
-            entity.HasIndex(e => e.Login, "UQ__Client__5E55825B66C4A257").IsUnique();
-
             entity.HasIndex(e => e.Email, "UQ__Client__A9D105344A3BC9D2").IsUnique();
 
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
             entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.Login).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(20);
             entity.Property(e => e.Phone).HasMaxLength(20);
             entity.Property(e => e.Surname).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<CompletedOrder>(entity =>
+        {
+            entity.HasKey(e => e.CompletedOrderId).HasName("PK__Complete__84FEEF03C1AE0166");
+
+            entity.ToTable("CompletedOrder");
+
+            entity.Property(e => e.CompletedOrderId).HasColumnName("CompletedOrderID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.CompletedOrders)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__Completed__Order__2A164134");
         });
 
         modelBuilder.Entity<Config>(entity =>
@@ -119,6 +158,7 @@ public partial class CodeverseContext : DbContext
 
             entity.Property(e => e.DetailId).HasColumnName("DetailID");
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
+            entity.Property(e => e.Count).HasDefaultValue(0);
             entity.Property(e => e.Description).HasMaxLength(300);
             entity.Property(e => e.Detail1)
                 .HasMaxLength(50)
@@ -166,6 +206,7 @@ public partial class CodeverseContext : DbContext
 
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
             entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Image).HasColumnType("image");
             entity.Property(e => e.Login).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(100);
@@ -183,7 +224,6 @@ public partial class CodeverseContext : DbContext
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
-            entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.StateId).HasColumnName("StateID");
             entity.Property(e => e.Total).HasColumnType("money");
 
@@ -295,6 +335,93 @@ public partial class CodeverseContext : DbContext
                 .HasColumnName("Position");
         });
 
+        modelBuilder.Entity<ReportAverageTotal>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportAverageTotal");
+
+            entity.Property(e => e.Average).HasColumnType("money");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<ReportCompletedOrder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportCompletedOrder");
+
+            entity.Property(e => e.Date).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<ReportEmployeeOrderCount>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportEmployeeOrderCount");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Surname).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<ReportPopularDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportPopularDetail");
+
+            entity.Property(e => e.Brand).HasMaxLength(50);
+            entity.Property(e => e.Detail).HasMaxLength(50);
+            entity.Property(e => e.Type).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<ReportPopularDevice>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportPopularDevice");
+
+            entity.Property(e => e.Device).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<ReportPopularService>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportPopularServices");
+
+            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.Service).HasMaxLength(60);
+        });
+
+        modelBuilder.Entity<ReportTurnover>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ReportTurnover");
+
+            entity.Property(e => e.Дата).HasColumnType("datetime");
+            entity.Property(e => e.Оборот).HasColumnType("money");
+        });
+
+        modelBuilder.Entity<Request>(entity =>
+        {
+            entity.HasKey(e => e.RequestId).HasName("PK__Request__33A8517ACDD49580");
+
+            entity.ToTable("Request");
+
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.DetailId).HasColumnName("DetailID");
+
+            entity.HasOne(d => d.Detail).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.DetailId)
+                .HasConstraintName("FK__Request__DetailI__3493CFA7");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__Request__OrderId__339FAB6E");
+        });
+
         modelBuilder.Entity<Service>(entity =>
         {
             entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB0EA4B68A354");
@@ -378,6 +505,24 @@ public partial class CodeverseContext : DbContext
             entity.Property(e => e.TypeId).HasColumnName("TypeID");
         });
 
+        modelBuilder.Entity<ViewDetailRequest>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewDetailRequest");
+
+            entity.Property(e => e.Brand).HasMaxLength(50);
+            entity.Property(e => e.BrandId).HasColumnName("BrandID");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(300);
+            entity.Property(e => e.Detail).HasMaxLength(50);
+            entity.Property(e => e.DetailId).HasColumnName("DetailID");
+            entity.Property(e => e.Image).HasColumnType("image");
+            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.Type).HasMaxLength(50);
+            entity.Property(e => e.TypeId).HasColumnName("TypeID");
+        });
+
         modelBuilder.Entity<ViewEmployee>(entity =>
         {
             entity
@@ -386,12 +531,91 @@ public partial class CodeverseContext : DbContext
 
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            entity.Property(e => e.Image).HasColumnType("image");
             entity.Property(e => e.Login).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(20);
+            entity.Property(e => e.Password).HasMaxLength(100);
             entity.Property(e => e.Position).HasMaxLength(50);
             entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.Surname).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<ViewOrder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewOrders");
+
+            entity.Property(e => e.Background).HasMaxLength(10);
+            entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.State).HasMaxLength(50);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.Surname).HasMaxLength(100);
+            entity.Property(e => e.Total).HasColumnType("money");
+        });
+
+        modelBuilder.Entity<ViewOrderDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewOrderDetail");
+
+            entity.Property(e => e.Brand).HasMaxLength(50);
+            entity.Property(e => e.BrandId).HasColumnName("BrandID");
+            entity.Property(e => e.Description).HasMaxLength(300);
+            entity.Property(e => e.Detail).HasMaxLength(50);
+            entity.Property(e => e.DetailId).HasColumnName("DetailID");
+            entity.Property(e => e.Image).HasColumnType("image");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.Type).HasMaxLength(50);
+            entity.Property(e => e.TypeId).HasColumnName("TypeID");
+        });
+
+        modelBuilder.Entity<ViewOrderDevice>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewOrderDevice");
+
+            entity.Property(e => e.Device).HasMaxLength(50);
+            entity.Property(e => e.DeviceId).HasColumnName("DeviceID");
+            entity.Property(e => e.Image).HasColumnType("image");
+            entity.Property(e => e.OrderDeviceId).HasColumnName("OrderDeviceID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.Price).HasColumnType("money");
+        });
+
+        modelBuilder.Entity<ViewOrderEmployee>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewOrderEmployee");
+
+            entity.Property(e => e.Background).HasMaxLength(10);
+            entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.PositionId).HasColumnName("PositionID");
+            entity.Property(e => e.State).HasMaxLength(50);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.Surname).HasMaxLength(100);
+            entity.Property(e => e.Total).HasColumnType("money");
+        });
+
+        modelBuilder.Entity<ViewOrderService>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("ViewOrderService");
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.Service).HasMaxLength(60);
+            entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class ViewEmployee
 {
@@ -13,11 +13,13 @@ public partial class ViewEmployee
 
     public string? Login { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
     public string? Email { get; set; }
 
     public int PositionId { get; set; }
 
     public string? Position { get; set; }
+
+    public byte[]? Image { get; set; }
 }

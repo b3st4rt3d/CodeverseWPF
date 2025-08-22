@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeverseWPF;
+namespace CodeverseWPF.DB;
 
 public partial class OrderDevice
 {
@@ -10,6 +10,8 @@ public partial class OrderDevice
     public int OrderId { get; set; }
 
     public int DeviceId { get; set; }
+
+    public int Count { get; set; }
 
     public virtual Device Device { get; set; } = null!;
 
